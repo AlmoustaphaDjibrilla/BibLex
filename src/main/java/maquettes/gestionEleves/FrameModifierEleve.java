@@ -21,6 +21,7 @@ import com.bibliotheque.ProjetBibliotheque.Entity.Eleve;
 import com.bibliotheque.ProjetBibliotheque.dao.CRUDEleve;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class FrameModifierEleve extends JDialog {
 
@@ -60,6 +61,7 @@ public class FrameModifierEleve extends JDialog {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public FrameModifierEleve() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FrameModifierEleve.class.getResource("/modifierEleveImages/bouton-modifier.png")));
 		
 		crud= new CRUDEleve();
 		
@@ -68,14 +70,16 @@ public class FrameModifierEleve extends JDialog {
 		setBounds(100, 100, 760, 454);
 		setTitle("Modifier les informations d'un élève");
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(new Color(255, 140, 0));
+		contentPanel.setBackground(Color.DARK_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 			JLabel lblNewLabel = new JLabel("Matricule de l'élève");
+			lblNewLabel.setForeground(new Color(255, 160, 122));
+			lblNewLabel.setIcon(new ImageIcon(FrameModifierEleve.class.getResource("/ajoutEleveImages/carte-didentite (1).png")));
 			lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-			lblNewLabel.setBounds(60, 10, 189, 39);
+			lblNewLabel.setBounds(36, 11, 223, 39);
 			contentPanel.add(lblNewLabel);
 		
 			spMatriculeEleve = new JSpinner();
@@ -85,23 +89,27 @@ public class FrameModifierEleve extends JDialog {
 		
 		
 			JLabel lblNewLabel_1 = new JLabel("Nom");
+			lblNewLabel_1.setForeground(new Color(255, 160, 122));
+			lblNewLabel_1.setIcon(new ImageIcon(FrameModifierEleve.class.getResource("/ajoutEleveImages/carte-didentite (3).png")));
 			lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-			lblNewLabel_1.setBounds(33, 110, 63, 31);
+			lblNewLabel_1.setBounds(33, 110, 82, 31);
 			contentPanel.add(lblNewLabel_1);
 		
 			txtNomEleve = new JTextField();
 			txtNomEleve.setEnabled(false);
 			txtNomEleve.setHorizontalAlignment(SwingConstants.CENTER);
 			txtNomEleve.setFont(new Font("Tahoma", Font.BOLD, 20));
-			txtNomEleve.setBounds(125, 105, 316, 39);
+			txtNomEleve.setBounds(173, 105, 563, 39);
 			contentPanel.add(txtNomEleve);
 			txtNomEleve.setColumns(10);
 		
 		
 			
 			lblPrenom = new JLabel("Prénom");
+			lblPrenom.setForeground(new Color(255, 160, 122));
+			lblPrenom.setIcon(new ImageIcon(FrameModifierEleve.class.getResource("/ajoutEleveImages/carte-didentite (2).png")));
 			lblPrenom.setFont(new Font("Tahoma", Font.BOLD, 18));
-			lblPrenom.setBounds(33, 178, 82, 31);
+			lblPrenom.setBounds(33, 178, 114, 31);
 			contentPanel.add(lblPrenom);
 		
 		
@@ -110,18 +118,20 @@ public class FrameModifierEleve extends JDialog {
 			txtPrenomEleve.setHorizontalAlignment(SwingConstants.CENTER);
 			txtPrenomEleve.setFont(new Font("Tahoma", Font.BOLD, 20));
 			txtPrenomEleve.setColumns(10);
-			txtPrenomEleve.setBounds(125, 173, 316, 39);
+			txtPrenomEleve.setBounds(173, 173, 563, 39);
 			contentPanel.add(txtPrenomEleve);
 		
 			JLabel lblNewLabel_2 = new JLabel("Classe");
+			lblNewLabel_2.setForeground(new Color(255, 160, 122));
+			lblNewLabel_2.setIcon(new ImageIcon(FrameModifierEleve.class.getResource("/ecranPrincipale/training.png")));
 			lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
-			lblNewLabel_2.setBounds(33, 299, 73, 39);
+			lblNewLabel_2.setBounds(33, 299, 130, 83);
 			contentPanel.add(lblNewLabel_2);
 		
 			list = new JList();
 			list.setEnabled(false);
 			list.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			list.setBounds(121, 255, 169, 162);
+			list.setBounds(173, 255, 169, 162);
 			list.setModel( new AbstractListModel() {
 			/**
 				 * 
@@ -160,9 +170,9 @@ public class FrameModifierEleve extends JDialog {
 					remplirChamp(eleve);
 				}
 			});
-			btnRechercher.setIcon(new ImageIcon(FrameModifierEleve.class.getResource("/modifierEleveImages/icons8-trouver-l'utilisateur-homme-32 (1).png")));
+			btnRechercher.setIcon(new ImageIcon(FrameModifierEleve.class.getResource("/ecranPrincipale/searching.png")));
 			btnRechercher.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			btnRechercher.setBounds(601, 0, 145, 49);
+			btnRechercher.setBounds(570, 0, 176, 80);
 			contentPanel.add(btnRechercher);
 		
 			btnEnregistrer = new JButton("Enregistrer");

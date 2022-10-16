@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -21,18 +21,23 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import com.bibliotheque.ProjetBibliotheque.Entity.Bibliothecaire;
-import com.bibliotheque.ProjetBibliotheque.Entity.Livre;
 import com.bibliotheque.ProjetBibliotheque.controle.ControleEmpruntsPenalites;
 import com.bibliotheque.ProjetBibliotheque.controle.ControleLivres;
 import com.bibliotheque.ProjetBibliotheque.controle.ControleRechercheLivre;
 import com.bibliotheque.ProjetBibliotheque.controle.ControlesEleves;
 import com.bibliotheque.ProjetBibliotheque.controle.ControlesEmpruntsEffectues;
 import com.bibliotheque.ProjetBibliotheque.controle.ControlesEmpruntsEnCours;
-import com.bibliotheque.ProjetBibliotheque.dao.CRUDLivre;
+import com.bibliotheque.ProjetBibliotheque.dialogue.rendu.RendererNoir;
+import com.bibliotheque.ProjetBibliotheque.dialogue.rendu.RendererNoirCentre;
+import com.bibliotheque.ProjetBibliotheque.dialogue.rendu.RendererOrange;
+import com.bibliotheque.ProjetBibliotheque.dialogue.rendu.RendererVert;
 
 import maquettes.gestionEleves.FrameAjoutEleve;
 import maquettes.gestionEleves.FrameModifierEleve;
@@ -40,7 +45,6 @@ import maquettes.gestionEmprunts.FrameAccorderEmprunt;
 import maquettes.gestionEmprunts.FrameRestituerEmprunt;
 import maquettes.gestionLivres.FrameAjoutLivre;
 import maquettes.gestionLivres.FrameAugmenterQuantiteLivre;
-import javax.swing.JTextField;
 
 public class FrameGestion extends JFrame {
 
@@ -72,6 +76,7 @@ public class FrameGestion extends JFrame {
 	private JMenuItem mnNouveauLivre;
 	private JMenuItem mntmNewMenuItem;
 	private JMenuItem mnModifierEleve;
+	
 
 	
 	private Bibliothecaire bib;
@@ -127,6 +132,7 @@ public class FrameGestion extends JFrame {
 	 * Create the frame.
 	 */
 	public FrameGestion() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FrameGestion.class.getResource("/images/loginImages/logo Lex.jpg")));
 		
 		controleEleve= new ControlesEleves();
 		controleEmpruntCours= new ControlesEmpruntsEnCours();
@@ -305,14 +311,15 @@ public class FrameGestion extends JFrame {
 			}
 		});
 		mnLivresBonEtats.setIcon(new ImageIcon(FrameGestion.class.getResource("/ecranPrincipale/shield.png")));
-		mnLivresBonEtats.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		mnLivresBonEtats.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuConsultationLivres.add(mnLivresBonEtats);
 		
 		verticalStrut_5 = Box.createVerticalStrut(20);
 		menuConsultationLivres.add(verticalStrut_5);
 		
 		mnPlusFrequentes = new JMenuItem("Plus frequentés");
-		mnPlusFrequentes.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		mnPlusFrequentes.setIcon(new ImageIcon(FrameGestion.class.getResource("/ecranPrincipale/insignes.png")));
+		mnPlusFrequentes.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		
 		/*
 		 * Afficher les livres les plus frequentrés
@@ -333,6 +340,7 @@ public class FrameGestion extends JFrame {
 		menuConsultationLivres.add(verticalStrut_6);
 		
 		mnMoinsFrequentes = new JMenuItem("Moins frequentés");
+		mnMoinsFrequentes.setIcon(new ImageIcon(FrameGestion.class.getResource("/ecranPrincipale/negative.png")));
 		
 		/*
 		 * Afficher les livres moins frequentéqs
@@ -343,7 +351,7 @@ public class FrameGestion extends JFrame {
 				afficherLivresMoinsFrequentes();
 			}
 		});
-		mnMoinsFrequentes.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		mnMoinsFrequentes.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuConsultationLivres.add(mnMoinsFrequentes);
 		
 		horizontalStrut_3 = Box.createHorizontalStrut(20);
@@ -387,6 +395,7 @@ public class FrameGestion extends JFrame {
 		menuBar.add(menuConsultationEleves);
 		
 		mnAfficherTousEleves = new JMenuItem("Tous les élèves");
+		mnAfficherTousEleves.setIcon(new ImageIcon(FrameGestion.class.getResource("/ecranPrincipale/team.png")));
 		mnAfficherTousEleves.setForeground(new Color(0, 100, 0));
 		
 		/*
@@ -406,6 +415,7 @@ public class FrameGestion extends JFrame {
 		menuConsultationEleves.add(verticalStrut_7);
 		
 		mnElevesPenalites = new JMenuItem("Elèves en pénalité");
+		mnElevesPenalites.setIcon(new ImageIcon(FrameGestion.class.getResource("/ecranPrincipale/carte-jaune.png")));
 		
 		/*
 		 * Afficher les emprunts en pénalité
@@ -577,6 +587,20 @@ public class FrameGestion extends JFrame {
 		controleLivres.chargerLivresBonEtats();
 		table.setModel(controleEleve.getModeleEleves());
 		titreTable.setText("Tous les élèves");
+		
+		TableColumnModel modeleColonne= table.getColumnModel();
+		
+		TableColumn matricules= modeleColonne.getColumn(0);
+		matricules.setCellRenderer(new RendererOrange());
+		
+		TableColumn noms= modeleColonne.getColumn(1);
+		noms.setCellRenderer(new RendererNoir());
+		
+		TableColumn prenoms= modeleColonne.getColumn(2);
+		prenoms.setCellRenderer(new RendererNoirCentre());
+		
+		TableColumn classes= modeleColonne.getColumn(3);
+		classes.setCellRenderer(new RendererOrange());
 	}
 	
 	
@@ -587,6 +611,9 @@ public class FrameGestion extends JFrame {
 		controleLivres.chargerLivresPlusFrequentes();
 		table.setModel(controleLivres.getModeleLivre());
 		titreTable.setText("Les livres les plus empruntés");
+		
+		//embellir l'affichage des livres avec des couleurs
+		afficherLivresCouleurs();
 	}
 	
 	
@@ -598,6 +625,9 @@ public class FrameGestion extends JFrame {
 		controleLivres.chargerLivresMoinsFrequentes();
 		table.setModel(controleLivres.getModeleLivre());
 		titreTable.setText("Les livres les moins frequentés");
+		
+		//embellir l'affichage des livres avec des couleurs
+		afficherLivresCouleurs();
 	}
 	
 	/**
@@ -606,6 +636,9 @@ public class FrameGestion extends JFrame {
 	public void afficherEmpruntsCours() {
 		table.setModel(controleEmpruntCours.getModeleEmpruntsCours());
 		titreTable.setText("Les emprunts en cours (non rendus) ");
+		
+		//Embellir l'affichage des emprunts en cours avec des couleurs
+		affichageEmprunts();
 	}
 	
 	
@@ -615,6 +648,9 @@ public class FrameGestion extends JFrame {
 	public void afficherEmpruntsEffectues() {
 		table.setModel(ctrEmpEffectues.getModeleEmprunsEffectues());
 		titreTable.setText("Les emprunts effectués (rendus) ");
+		
+		//Embellir l'affichage des emprunts effectués avec des couleurs
+		affichageEmprunts();
 	}
 	
 	
@@ -624,6 +660,9 @@ public class FrameGestion extends JFrame {
 	public void afficherLivres() {
 		table.setModel(controleLivres.getModeleLivre());
 		titreTable.setText("Les livres enregistrés");
+		
+		//embellir l'affichage des livres avec des couleurs
+		afficherLivresCouleurs();
 	}
 	
 	
@@ -633,14 +672,25 @@ public class FrameGestion extends JFrame {
 	public void afficherEmpruntsPenalites() {
 		table.setModel(controleEmpruntsPenalites.getModelesEmpruntsPenalites());
 		titreTable.setText("Les emprunts en pénalité");
+		
+		//embellir l'affichage des emprunts en pénalités avec des couleurs
+		affichagesPenalitesEmpruntsCouleur();
 	}
 	
+	
+	/**
+	 * Afficher les livres recherchés au travers d'un mot de recherche
+	 * @param motRecherche
+	 */
 	public void rechercheLivre(String motRecherche) {
 		controleRechercheLivre= new ControleRechercheLivre(motRecherche);
 		table.setModel(controleRechercheLivre.getModRechLivre());
 		titreTable.setText("Résultats de la recherche");
 		txtRecherche.setText("");
 		panel.setVisible(false);
+		
+		//embellir l'affichage des livres recherchés
+		afficherLivresCouleurs();
 	}
 	
 	
@@ -690,5 +740,106 @@ public class FrameGestion extends JFrame {
 
 	public void setControleLivres(ControleLivres controleLivres) {
 		this.controleLivres = controleLivres;
+	}
+	
+	
+	
+	/**
+	 * Embellir le tableau d'affichage des livres
+	 */
+	public void afficherLivresCouleurs() {
+		
+		TableColumnModel modeleColumn= table.getColumnModel();
+		
+		// Embellissement de la colonne ISBN
+		TableColumn isbn= modeleColumn.getColumn(0);
+		isbn.setCellRenderer(new RendererOrange());
+		
+		//Embellissement de la colonne TITRE
+		TableColumn titres= modeleColumn.getColumn(1);
+		titres.setCellRenderer(new RendererNoirCentre());
+		
+		//Embellissement de la colonne ANNEE_EDITION
+		TableColumn annees= modeleColumn.getColumn(2);
+		annees.setCellRenderer(new RendererOrange());
+		
+		//Embellissement de la colonne Niveau
+		TableColumn niveaux= modeleColumn.getColumn(3);
+		niveaux.setCellRenderer(new RendererNoirCentre());
+		
+		//Embellissement de la colonne CATEGORIE
+		TableColumn categories= modeleColumn.getColumn(4);
+		categories.setCellRenderer(new RendererOrange());
+		
+		//Embellissement de la colonne QUANTITE
+		TableColumn quantites= modeleColumn.getColumn(5);
+		quantites.setCellRenderer(new RendererNoirCentre());
+		
+		//Embellissement de la colonne NOMBRE_EMPRUNTS
+		TableColumn emprunts= modeleColumn.getColumn(6);
+		emprunts.setCellRenderer(new RendererOrange());
+	}
+	
+	
+	
+	/**
+	 * Embellir le tableau d'affichage des emprunts en pénalités
+	 */
+	public void affichagesPenalitesEmpruntsCouleur() {
+		
+		TableColumnModel modeleColonne= table.getColumnModel();
+		
+		//Embellissement de la colonne ID_EMPRUNT
+		TableColumn idEmprunt= modeleColonne.getColumn(0);
+		idEmprunt.setCellRenderer(new RendererOrange());
+		
+		//Embellissement de la colonne MATRICULE_ELEVE
+		TableColumn matricules= modeleColonne.getColumn(1);
+		matricules.setCellRenderer(new RendererOrange());
+		
+		//Embellissement de la colonne NOM_PRENOM_ELEVE
+		TableColumn noms= modeleColonne.getColumn(2);
+		noms.setCellRenderer(new RendererNoir());
+		
+		//Embellissement de la colonne ISBN_LIVRE
+		TableColumn isbn= modeleColonne.getColumn(3);
+		isbn.setCellRenderer(new RendererNoirCentre());
+		
+		//Embellissement de la colonne TITRE_LIVRE
+		TableColumn titres= modeleColonne.getColumn(4);
+		titres.setCellRenderer(new RendererOrange());
+		
+		//Embellissement de la colonne DATE_LIMITE
+		TableColumn limites= modeleColonne.getColumn(5);
+		limites.setCellRenderer(new RendererOrange());
+	}
+	
+	
+	/**
+	 * Embellir le tableau d'affichage des emprunts
+	 */
+	public void affichageEmprunts() {
+		
+		TableColumnModel modeleColonne= table.getColumnModel();
+		
+		//Embellissement de la colonne ID_EMPRUNT
+		TableColumn idEmprunt= modeleColonne.getColumn(0);
+		idEmprunt.setCellRenderer(new RendererVert());
+		
+		//Embellissement de la colonne MATRICULE_ELEVE
+		TableColumn matricules= modeleColonne.getColumn(1);
+		matricules.setCellRenderer(new RendererOrange());
+		
+		//Embellissement de la colonne ISBN_LIVRE
+		TableColumn isbn= modeleColonne.getColumn(2);
+		isbn.setCellRenderer(new RendererNoirCentre());
+		
+		//Embellissement de la colonne DATE_RETRAIT
+		TableColumn retrait= modeleColonne.getColumn(3);
+		retrait.setCellRenderer(new RendererOrange());
+		
+		//Embellissement de la colonne ID_EMPRUNT
+		TableColumn retour= modeleColonne.getColumn(4);
+		retour.setCellRenderer(new RendererVert());
 	}
 }

@@ -19,11 +19,13 @@ import javax.swing.border.EmptyBorder;
 
 import com.bibliotheque.ProjetBibliotheque.Entity.Classe;
 import com.bibliotheque.ProjetBibliotheque.Entity.Eleve;
+import com.bibliotheque.ProjetBibliotheque.controle.ControlesEleves;
 import com.bibliotheque.ProjetBibliotheque.dao.CRUDEleve;
 
 import maquettes.FrameGestion;
 
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class FrameAjoutEleve extends JDialog {
 
@@ -38,6 +40,7 @@ public class FrameAjoutEleve extends JDialog {
 	private JList<String> list;
 	private JSpinner spMatriculeEleve;
 	private CRUDEleve crudEleve;
+	private ControlesEleves controlesEleves;
 
 	/**
 	 * Launch the application.
@@ -56,9 +59,10 @@ public class FrameAjoutEleve extends JDialog {
 	 * Create the dialog.
 	 */
 	public FrameAjoutEleve() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FrameAjoutEleve.class.getResource("/ajoutEleveImages/nom.png")));
 		
 		crudEleve= new CRUDEleve();
-		
+		controlesEleves= new ControlesEleves();
 		
 		//setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		
@@ -68,49 +72,57 @@ public class FrameAjoutEleve extends JDialog {
 		setTitle("Ajouter un nouvel élève");
 		
 		getContentPane().setBackground(new Color(255, 127, 80));
-		setBounds(100, 100, 581, 393);
+		setBounds(100, 100, 636, 472);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(new Color(255, 127, 80));
+		contentPanel.setBackground(Color.DARK_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
 			JLabel lblNewLabel = new JLabel("Matricule\r\n");
+			lblNewLabel.setForeground(new Color(255, 160, 122));
+			lblNewLabel.setIcon(new ImageIcon(FrameAjoutEleve.class.getResource("/ajoutEleveImages/carte-didentite (1).png")));
 			lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-			lblNewLabel.setBounds(81, 6, 108, 41);
+			lblNewLabel.setBounds(60, 6, 129, 62);
 			contentPanel.add(lblNewLabel);
 		}
 		
 		spMatriculeEleve = new JSpinner();
 		spMatriculeEleve.setFont(new Font("Tahoma", Font.BOLD, 20));
-		spMatriculeEleve.setBounds(199, 10, 209, 32);
+		spMatriculeEleve.setBounds(199, 21, 353, 32);
 		contentPanel.add(spMatriculeEleve);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nom");
+		lblNewLabel_1.setForeground(new Color(255, 160, 122));
+		lblNewLabel_1.setIcon(new ImageIcon(FrameAjoutEleve.class.getResource("/ajoutEleveImages/carte-didentite (3).png")));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_1.setBounds(81, 78, 83, 32);
+		lblNewLabel_1.setBounds(60, 78, 108, 48);
 		contentPanel.add(lblNewLabel_1);
 		
 		txtNomEleve = new JTextField();
 		txtNomEleve.setFont(new Font("Tahoma", Font.BOLD, 20));
-		txtNomEleve.setBounds(199, 77, 209, 34);
+		txtNomEleve.setBounds(199, 85, 353, 34);
 		contentPanel.add(txtNomEleve);
 		txtNomEleve.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Prénom");
+		lblNewLabel_2.setForeground(new Color(255, 160, 122));
+		lblNewLabel_2.setIcon(new ImageIcon(FrameAjoutEleve.class.getResource("/ajoutEleveImages/carte-didentite (2).png")));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_2.setBounds(81, 148, 83, 26);
+		lblNewLabel_2.setBounds(60, 158, 108, 26);
 		contentPanel.add(lblNewLabel_2);
 		
 		txtPrenomEleve = new JTextField();
 		txtPrenomEleve.setFont(new Font("Tahoma", Font.BOLD, 20));
 		txtPrenomEleve.setColumns(10);
-		txtPrenomEleve.setBounds(199, 144, 209, 34);
+		txtPrenomEleve.setBounds(199, 154, 353, 34);
 		contentPanel.add(txtPrenomEleve);
 		
 		JLabel lblNewLabel_3 = new JLabel("Classe");
+		lblNewLabel_3.setForeground(new Color(255, 160, 122));
+		lblNewLabel_3.setIcon(new ImageIcon(FrameAjoutEleve.class.getResource("/ajoutEleveImages/salle-de-classe.png")));
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_3.setBounds(81, 265, 69, 22);
+		lblNewLabel_3.setBounds(56, 251, 135, 83);
 		contentPanel.add(lblNewLabel_3);
 		
 		list = new JList();
@@ -131,7 +143,7 @@ public class FrameAjoutEleve extends JDialog {
 			}
 		});
 		
-		list.setBounds(199, 218, 129, 128);
+		list.setBounds(199, 240, 129, 128);
 		contentPanel.add(list);
 		
 		JButton btnAjouterEleve = new JButton("Ajouter\r\n");
@@ -144,7 +156,8 @@ public class FrameAjoutEleve extends JDialog {
 					reinitialiser();
 				}
 				else {
-					boolean creation= crudEleve.creer(eleve);
+					//boolean creation= crudEleve.creer(eleve);
+					boolean creation= controlesEleves.ajouterEleve(eleve);
 					if (creation==true) {
 						JOptionPane.showMessageDialog(null, eleve.getNom()+" ajouté(e)");
 						reinitialiser();
@@ -157,7 +170,7 @@ public class FrameAjoutEleve extends JDialog {
 				}
 			}
 		});
-		btnAjouterEleve.setBounds(438, 308, 129, 48);
+		btnAjouterEleve.setBounds(493, 387, 129, 48);
 		contentPanel.add(btnAjouterEleve);
 		
 		

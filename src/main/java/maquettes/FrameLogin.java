@@ -20,9 +20,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import com.bibliotheque.ProjetBibliotheque.Entity.Bibliothecaire;
 import com.bibliotheque.ProjetBibliotheque.dao.ControleBibliothecaire;
+import java.awt.Toolkit;
 
 public class FrameLogin extends JFrame {
 
@@ -70,6 +72,7 @@ public class FrameLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public FrameLogin() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FrameLogin.class.getResource("/images/loginImages/1665063958680.jpg")));
 		//initialiserConnection();
 		
 		controleBib= new ControleBibliothecaire();
@@ -188,6 +191,11 @@ public class FrameLogin extends JFrame {
 		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		txtPassword.setBounds(478, 184, 153, 33);
 		contentPane.add(txtPassword);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(FrameLogin.class.getResource("/images/loginImages/bibliotheque.png")));
+		lblNewLabel.setBounds(29, 10, 301, 423);
+		contentPane.add(lblNewLabel);
 	}
 	
 	

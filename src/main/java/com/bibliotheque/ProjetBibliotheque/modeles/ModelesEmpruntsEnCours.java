@@ -13,7 +13,7 @@ public class ModelesEmpruntsEnCours extends AbstractTableModel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static final String[] TITRES= {"ID", "MATRICULE_ELEVE", "ISBN_LIVRE", "DATE_RETRAIT", "DATE_RETOUR"};
+	private static final String[] TITRES= {"ID_EMPRUNT", "MATRICULE_ELEVE", "ISBN_LIVRE", "DATE_RETRAIT", "DATE_RETOUR"};
 	private final List<Emprunt> empruntsCours;
 	
 	

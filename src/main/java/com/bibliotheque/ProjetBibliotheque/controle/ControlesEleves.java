@@ -29,5 +29,21 @@ public class ControlesEleves {
 		this.modeleEleves = modeleEleves;
 	}
 	
-	
+	public boolean ajouterEleve(Eleve nouvelEleve) {
+		boolean ajout= false;
+		
+		try {
+			
+			ajout= crudEleve.creer(nouvelEleve);
+			
+			this.modeleEleves.ajouterEleve(nouvelEleve);
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			ajout= false;
+		}
+		
+		return ajout;
+	}
 }

@@ -1,8 +1,10 @@
 package com.bibliotheque.ProjetBibliotheque.modeles;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 import com.bibliotheque.ProjetBibliotheque.Entity.Eleve;
@@ -82,5 +84,31 @@ public class ModelesEleves extends AbstractTableModel{
 	public Eleve getEleve(int rowIndex) {
 		Eleve eleve= lesEleves.get(rowIndex);
 		return eleve;
+	}
+	
+	
+	
+	
+	/**
+	 * Cette méthode renvoie la classe de l'element de la table situé à l'index passé en parametre
+	 * @param columnIndex
+	 * return class
+	 */
+	@Override
+	public Class<?> getColumnClass (int columnIndex){
+		
+		Class<?> classe= null;
+		
+		classe= super.getColumnClass(columnIndex);
+		
+		return classe;
+	}
+	
+	
+	public void ajouterEleve(Eleve nouvelEleve) {
+		this.lesEleves.add(nouvelEleve);
+		int index= this.lesEleves.size()-1;
+		//fireTableRowsInserted(index, index);
+		this.fireTableDataChanged();
 	}
 }

@@ -31,6 +31,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class FrameAjoutLivre extends JDialog {
 
@@ -93,70 +94,81 @@ public class FrameAjoutLivre extends JDialog {
 		this.setTitle("Ajout de livre");
 		setBounds(100, 100, 627, 438);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(new Color(32, 178, 170));
+		contentPanel.setBackground(Color.DARK_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("ISBN");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel.setBounds(41, 23, 77, 27);
-		contentPanel.add(lblNewLabel);
+		JLabel lblIsbn = new JLabel("ISBN");
+		lblIsbn.setForeground(new Color(255, 160, 122));
+		lblIsbn.setIcon(new ImageIcon(FrameAjoutLivre.class.getResource("/frameEmpruntImages/code-a-barre (1).png")));
+		lblIsbn.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblIsbn.setBounds(6, 18, 99, 36);
+		contentPanel.add(lblIsbn);
 		
 		txtIsbn = new JTextField();
 		txtIsbn.setFont(new Font("Tahoma", Font.BOLD, 19));
-		txtIsbn.setBounds(108, 20, 419, 32);
+		txtIsbn.setBounds(143, 20, 419, 32);
 		contentPanel.add(txtIsbn);
 		txtIsbn.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Titre");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_1.setBounds(37, 81, 68, 32);
-		contentPanel.add(lblNewLabel_1);
+		JLabel lblTitre = new JLabel("Titre");
+		lblTitre.setForeground(new Color(255, 160, 122));
+		lblTitre.setIcon(new ImageIcon(FrameAjoutLivre.class.getResource("/frameEmpruntImages/titre (1).png")));
+		lblTitre.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblTitre.setBounds(6, 81, 83, 32);
+		contentPanel.add(lblTitre);
 		
 		txtTitre = new JTextField();
 		txtTitre.setFont(new Font("Tahoma", Font.BOLD, 19));
 		txtTitre.setColumns(10);
-		txtTitre.setBounds(108, 81, 419, 32);
+		txtTitre.setBounds(143, 81, 419, 32);
 		contentPanel.add(txtTitre);
 		
-		JLabel lblNewLabel_2 = new JLabel("Année");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_2.setBounds(37, 158, 65, 13);
-		contentPanel.add(lblNewLabel_2);
+		JLabel lblAnnee = new JLabel("Année");
+		lblAnnee.setForeground(new Color(255, 160, 122));
+		lblAnnee.setIcon(new ImageIcon(FrameAjoutLivre.class.getResource("/frameEmpruntImages/evenements.png")));
+		lblAnnee.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblAnnee.setBounds(6, 146, 115, 36);
+		contentPanel.add(lblAnnee);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("d'édition");
-		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_2_1.setBounds(22, 181, 81, 13);
-		contentPanel.add(lblNewLabel_2_1);
+		JLabel lblEdition = new JLabel("d'édition");
+		lblEdition.setForeground(new Color(255, 160, 122));
+		lblEdition.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblEdition.setBounds(22, 181, 81, 13);
+		contentPanel.add(lblEdition);
 		
 		spAnneeEdition = new JSpinner();
 		spAnneeEdition.setFont(new Font("Tahoma", Font.BOLD, 19));
-		spAnneeEdition.setBounds(108, 158, 419, 36);
+		spAnneeEdition.setBounds(143, 158, 419, 36);
 		contentPanel.add(spAnneeEdition);
 		
-		JLabel lblNewLabel_3 = new JLabel("Niveau");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_3.setBounds(37, 258, 68, 13);
-		contentPanel.add(lblNewLabel_3);
+		JLabel lblNiveau = new JLabel("Niveau");
+		lblNiveau.setForeground(new Color(255, 160, 122));
+		lblNiveau.setIcon(new ImageIcon(FrameAjoutLivre.class.getResource("/frameEmpruntImages/classe (1).png")));
+		lblNiveau.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNiveau.setBounds(6, 226, 115, 45);
+		contentPanel.add(lblNiveau);
 		
 		listNiveaux = new JComboBox();
 		listNiveaux.setModel( new DefaultComboBoxModel( niveaus ) );
 		listNiveaux.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		listNiveaux.setMaximumRowCount(16);
-		listNiveaux.setBounds(108, 251, 419, 32);
+		listNiveaux.setBounds(143, 233, 419, 32);
 		contentPanel.add(listNiveaux);
 		
-		JLabel lblNewLabel_3_1 = new JLabel("Catégorie");
-		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_3_1.setBounds(22, 325, 83, 20);
-		contentPanel.add(lblNewLabel_3_1);
+		JLabel lblCategorie = new JLabel("Catégorie");
+		lblCategorie.setForeground(new Color(255, 160, 122));
+		lblCategorie.setIcon(new ImageIcon(FrameAjoutLivre.class.getResource("/frameEmpruntImages/categories.png")));
+		lblCategorie.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblCategorie.setBounds(6, 305, 127, 40);
+		contentPanel.add(lblCategorie);
 		
 		listCategories = new JComboBox<Categorie>();
 		listCategories.setModel(new DefaultComboBoxModel<Categorie>( categories ));
 		listCategories.setMaximumRowCount(16);
 		listCategories.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		listCategories.setBounds(108, 319, 419, 32);
+		listCategories.setBounds(143, 305, 419, 32);
 		contentPanel.add(listCategories);
 		
 			JPanel buttonPane = new JPanel();

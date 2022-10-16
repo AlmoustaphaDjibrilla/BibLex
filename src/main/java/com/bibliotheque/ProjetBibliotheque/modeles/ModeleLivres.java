@@ -113,14 +113,14 @@ public class ModeleLivres extends AbstractTableModel {
 		
 		lesLivres.clear();
 		lesLivres.addAll(newDonnees);
-		fireTableDataChanged();
+		this.fireTableDataChanged();
 	}
 	
 	
 	public void ajouterLivre(Livre livre) {
 		
-		lesLivres.add(livre);
-		int index= lesLivres.size() -1;
+		this.lesLivres.add(livre);
+		int index= this.lesLivres.size() -1;
 		fireTableRowsInserted(index, index);
 	}
 }
