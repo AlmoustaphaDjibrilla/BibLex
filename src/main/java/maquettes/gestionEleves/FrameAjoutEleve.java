@@ -26,6 +26,8 @@ import maquettes.FrameGestion;
 
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
 
 public class FrameAjoutEleve extends JDialog {
 
@@ -41,6 +43,7 @@ public class FrameAjoutEleve extends JDialog {
 	private JSpinner spMatriculeEleve;
 	private CRUDEleve crudEleve;
 	private ControlesEleves controlesEleves;
+	private JLabel lblPhoto;
 
 	/**
 	 * Launch the application.
@@ -72,7 +75,7 @@ public class FrameAjoutEleve extends JDialog {
 		setTitle("Ajouter un nouvel élève");
 		
 		getContentPane().setBackground(new Color(255, 127, 80));
-		setBounds(100, 100, 636, 472);
+		setBounds(100, 100, 962, 471);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.DARK_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -170,8 +173,16 @@ public class FrameAjoutEleve extends JDialog {
 				}
 			}
 		});
-		btnAjouterEleve.setBounds(493, 387, 129, 48);
+		btnAjouterEleve.setBounds(423, 386, 129, 48);
 		contentPanel.add(btnAjouterEleve);
+		
+		lblPhoto = new JLabel("");
+		lblPhoto.setBackground(Color.DARK_GRAY);
+		lblPhoto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPhoto.setIcon(new ImageIcon(FrameAjoutEleve.class.getResource("/modifierEleveImages/man (1).png")));
+		lblPhoto.setBorder(new LineBorder(Color.ORANGE, 2));
+		lblPhoto.setBounds(562, 21, 376, 403);
+		contentPanel.add(lblPhoto);
 		
 		
 	}
